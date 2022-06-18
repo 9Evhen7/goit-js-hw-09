@@ -36,9 +36,18 @@ function onDateChoose(selectedDate) {
 };
 
 function onClick() { 
+    startButtonRef.disabled = true;
+    myInput.disabled = true;
+    doAction();
+}
+
+function doAction() { 
     setInterval(() => {
-    const result = fp.selectedDates[0] - new Date();
-    const {days, hours, minutes, seconds} = convertMs(result);
+        const result = fp.selectedDates[0] - new Date();
+        if (result < 0) { 
+            return;
+        }
+        const {days, hours, minutes, seconds} = convertMs(result);
 
     daysLableRef.textContent = addLeadingZero(days);
     hoursLableRef.textContent = addLeadingZero(hours);
